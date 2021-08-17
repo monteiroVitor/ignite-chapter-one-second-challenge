@@ -19,7 +19,7 @@ export function SideBar({ onButtonClick, selectedGenreId }: SideBarProps) {
   const [genres, setGenres] = useState<GenreResponseProps[]>([]);
 
   useEffect(() => {
-    api.get<GenreResponseProps[]>("genres").then(response => {
+    api.get<GenreResponseProps[]>("genres").then((response) => {
       setGenres(response.data);
     });
   }, []);
@@ -31,12 +31,13 @@ export function SideBar({ onButtonClick, selectedGenreId }: SideBarProps) {
       </span>
 
       <div className="buttons-container">
-        {genres.map(genre => (
+        {genres.map((genre) => (
           <Button
             key={String(genre.id)}
             title={genre.title}
             iconName={genre.name}
-            onClick={() => onButtonClick(genre.id)}
+            genreId={genre.id}
+            onButtonClick={onButtonClick}
             selected={selectedGenreId === genre.id}
           />
         ))}
